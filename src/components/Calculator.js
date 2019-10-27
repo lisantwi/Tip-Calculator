@@ -162,7 +162,7 @@ class Calculator extends React.Component {
                 /> <br/>
               <Label>Party Size
               </Label>
-                <Form.Input id='party' placeholder='Enter the size of your party' onChange={this.handleChange} name='party' type='number' required /><br/>
+                <Form.Input id='party' min='1' placeholder='Enter the size of your party' onChange={this.handleChange} name='party' type='number' required /><br/>
                 <Button type='submit'>Calculate Tip</Button>  
                 </Form><br/>
                 <PricesDiv>
