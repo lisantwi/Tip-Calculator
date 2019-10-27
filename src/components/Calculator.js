@@ -94,7 +94,8 @@ class Calculator extends React.Component {
 
 
 
-    handleCalculation = () => {
+    handleCalculation = (e) => {
+        e.preventDefault()
         const {percentage, total} = this.state
         let value = ''
         let tip = (percentage/100) * total
@@ -131,32 +132,37 @@ class Calculator extends React.Component {
  
 
     render(){
+       
         const {party, clicked, tip, final_total, styling} = this.state
         return(
+           
             <CalculatorDiv>
+       
             <div className={styling}>
-                <Form ref={this.form} onSubmit={this.handleCalculation}>
+                <Form className='calculator-form' ref={this.form} onSubmit={this.handleCalculation}>
                 <Label>Total Bill</Label>
                 <Cleave
                 required
                 name='total'
+                id='total'
                 options={{numeral:true, numeralDecimalMark: ',',
                 prefix:'$',
                 delimiter: '.'} }
                 onChange={this.handleChange}/>
                 {/* <Form.Input name='total' onChange={this.handleChange}placeholder='Total Bill' type='number' required /> <br/> */}
                 <Label>Tip Percentage</Label>
-                <Form.Dropdown placeholder='%'
+                <Form.Dropdown  placeholder='%'
                 required
                 onChange={this.handleDropDownChange}
                     compact
                     selection
                     name='percentage'
+                    id ='percentage'
                     options= {this.state.options}
                 /> <br/>
               <Label>Party Size
               </Label>
-                <Form.Input placeholder='Enter the size of your party' onChange={this.handleChange} name='party' type='number' required /><br/>
+                <Form.Input id='party' placeholder='Enter the size of your party' onChange={this.handleChange} name='party' type='number' required /><br/>
                 <Button type='submit'>Calculate Tip</Button>  
                 </Form><br/>
                 <PricesDiv>
@@ -167,7 +173,7 @@ class Calculator extends React.Component {
                     <br/> <br/>
                     Total Amount: $ {final_total.toFixed(2)} <br/>
                     Total Amount per person: $ {(final_total/party).toFixed(2)}  <br/> <br/>
-                    {styling === 'bad' ? <p><b>Your tip is lower than the standard tip average of 15-20% </b>  <FontAwesomeIcon icon={faFrown} /></p> : (styling === 'good' ?  <p><b>Your tip is within the standard tip average </b> <FontAwesomeIcon icon={faSmile}/> </p> : <p><b>You are an all-star tipper!!! </b> <FontAwesomeIcon icon={faStar} size='med'/></p> )}
+                    {styling === 'bad' ? <p><b>Your tip is lower than the standard tip average of 15-20% </b>  <FontAwesomeIcon icon={faFrown} /></p> : (styling === 'good' ?  <p><b>Your tip is within the standard tip average </b> <FontAwesomeIcon icon={faSmile}/> </p> : <p><b>You are an all-star tipper!!! </b> <FontAwesomeIcon icon={faStar} size='sm'/></p> )}
                 </div>
                 </div>
                   
